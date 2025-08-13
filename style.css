@@ -521,7 +521,9 @@ body {
     line-height: 1.2em;
     margin: 0;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh
 }
 
 embed, img, object, video {
@@ -530,7 +532,7 @@ embed, img, object, video {
 
 a {
     color: #000;
-    transition: color .3s
+    transition: all 0.3s ease
 }
 
 a:hover {
@@ -540,6 +542,21 @@ a:hover {
 h2 {
     margin: .7em 0;
     color: #1a4645;
+}
+
+.content h2 {
+    position: relative;
+}
+
+.content h2:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #266867, #1a4645);
+    border-radius: 2px;
 }
 
 main {
@@ -582,9 +599,9 @@ main {
 
 @media screen and (min-width:769px) {
     main .content {
-        max-width: calc(100% - 220px);
+        max-width: calc(100% - 260px);
         width: 900px;
-        margin-left: 220px
+        margin-left: 260px
     }
 }
 
@@ -592,7 +609,8 @@ main .about {
     display: flex;
     height: 100vh;
     padding-bottom: 15vh;
-    min-width: 220px;
+    min-width: 260px;
+    max-width: 260px;
     justify-content: center;
     flex-direction: column;
     align-items: center
@@ -613,10 +631,19 @@ main .about {
 
 main .about h2 {
     font-size: 22px;
-    margin-top: 25px;
-    margin-bottom: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
     color: #222;
     font-weight: 400
+}
+
+.separator {
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #266867, #1a4645);
+    margin: 25px auto;
+    border-radius: 2px;
+    opacity: 0.6
 }
 
 main .about {
@@ -632,15 +659,68 @@ main .about img {
 .social {
     list-style-type: none;
     padding: 0;
-    margin-top: 0
+    margin: 0 0 30px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #266867, #1a4645);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(38, 104, 103, 0.2);
+    letter-spacing: 0.5px
+}
+
+.contact-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(38, 104, 103, 0.3);
+    background: linear-gradient(135deg, #1a4645, #266867);
+    color: white
+}
+
+.contact-button i {
+    margin-right: 8px
 }
 
 .social li {
-    float: left
+    display: flex;
+    align-items: center;
+    justify-content: center
 }
 
 .social li i {
-    font-size: 34px
+    font-size: 34px;
+    transition: all 0.3s ease;
+    color: #555
+}
+
+.social li:hover i {
+    transform: translateY(-3px);
+    color: #266867
+}
+
+.social a[href*="github"]:hover i {
+    color: #333
+}
+
+.social a[href*="linkedin"]:hover i {
+    color: #0077b5
+}
+
+.social a[href*="twitter"]:hover i {
+    color: #1da1f2
+}
+
+.social a[href*="scholar"]:hover i {
+    color: #4285f4
 }
 
 .post-categories {
@@ -672,7 +752,7 @@ main .about img {
 .post-meta {
     display: flex;
     justify-content: space-between;
-    align-items: center
+    align-items: flex-start
 }
 
 .post-link {
@@ -687,25 +767,32 @@ main .about img {
 
 .post-container, .posts {
     list-style-type: none;
-    margin: 45px 30px
+    margin: 45px 0;
+    padding: 25px 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease
+}
+
+.post-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12)
 }
 
 @media screen and (max-width:480px) {
     .post-container, .posts {
-        margin-left: 20px;
-        margin-right: 20px
+        padding: 20px;
+        margin: 30px 0
     }
 }
 
 @media screen and (max-width:768px) {
     .post-container, .posts {
-        padding: 0!important;
+        padding: 15px!important;
         margin-top: 0
     }
-}
-
-.post-container {
-    padding-left: 40px
 }
 
 .post {
@@ -718,7 +805,23 @@ main .about img {
 .post a , .talk a{
     color: #266867;
     text-decoration: none;
-    transition: border-bottom .4s
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.post a:after, .talk a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: #f58800;
+    transition: width 0.3s ease;
+}
+
+.post a:hover:after, .talk a:hover:after {
+    width: 100%;
 }
 
 .post a:hover, .talk a:hover{
@@ -735,9 +838,6 @@ main .about img {
     font-weight: 400
 }
 
-.social>a>li {
-    margin: 0 10px
-}
 
 .education {
     margin-top: 10px;
@@ -756,7 +856,8 @@ main .about img {
 .education-meta>p {
     margin-top: 0;
     margin-bottom: 10px;
-    font-size: .9rem
+    font-size: .9rem;
+    text-align: right
 }
 
 .experience{
@@ -776,7 +877,8 @@ main .about img {
 .experience-meta>p {
     margin-top: 0;
     margin-bottom: 10px;
-    font-size: .9rem
+    font-size: .9rem;
+    text-align: right
 }
 
 
@@ -791,10 +893,13 @@ main .about img {
     color: #aaa
 }
 
-.publication>h3 {
+.publication h3 {
     flex: 1;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-weight: bold;
+    font-size: 1.1em;
+    line-height: 1.4;
+    color: #1a4645;
 }
 
 .talk>h3 {
@@ -803,19 +908,93 @@ main .about img {
 }
 
 
-.publication>.icons, .talk>.icons{
-    margin: 0
+.publication .icons, .talk .icons{
+    margin: 0;
+    display: inline-flex;
+    gap: 10px;
+    margin-left: 10px
+}
+
+.publication a.post-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    background-color: #266867;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+}
+
+.publication a.post-link:hover {
+    background-color: #1a4645;
+}
+
+.publication a.post-link i {
+    margin-left: 5px;
 }
 
 .publication-post>p , .talk>p{
     margin-block-start: 0px;
 }
 
+.publication p {
+    margin-top: 8px;
+    margin-bottom: 0;
+    line-height: 1.5;
+    color: #555;
+}
+
+.publication p strong {
+    color: #1a4645;
+    font-weight: 600;
+}
+
+.conference-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-left: 8px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px
+}
+
+.conference-badge.ccs {
+    background: linear-gradient(135deg, #e74c3c, #c0392b)
+}
+
+.conference-badge.usenix {
+    background: linear-gradient(135deg, #f39c12, #e67e22)
+}
+
+.conference-badge.vldb {
+    background: linear-gradient(135deg, #3498db, #2980b9)
+}
+
+.publication ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.publication li {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-left: 4px solid #266867;
+    background-color: #f9f9f9;
+    border-radius: 0 8px 8px 0;
+}
+
 .profile-detail {
     display: flex;
     color: #555;
     font-size: .8rem;
-    margin: 0 30px
+    margin: 0 20px;
+    text-align: center;
+    max-width: 220px
 }
 
 .profile-detail>.icon {
@@ -889,7 +1068,15 @@ main .about img {
 
 
 .profile-image {
-    border-radius: 50%
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease
+}
+
+.profile-image:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15)
 }
 
 .cv-text {
